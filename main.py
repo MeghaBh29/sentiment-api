@@ -46,8 +46,3 @@ async def analyze_comment(request: CommentRequest):
         return SentimentResponse(**data)
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"AI analysis failed: {str(e)}")
-```
-
-Then commit it on GitHub → Render will auto-redeploy → try submitting again with the full URL:
-```
-https://sentiment-api-2mgs.onrender.com/comment
