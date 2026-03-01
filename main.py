@@ -1,11 +1,20 @@
 import os
 import json
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from google import genai
 from google.genai import types
 
 app = FastAPI()
+
+# Add this — allows any website to call your API
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
 
@@ -18,6 +27,10 @@ class SentimentResponse(BaseModel):
 
 @app.get("/")
 async def root():
+    return {"status": "ok"}
+
+@app.get("/good")
+async def good():
     return {"status": "ok"}
 
 @app.get("/comment")
