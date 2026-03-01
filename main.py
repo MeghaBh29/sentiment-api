@@ -30,7 +30,7 @@ async def analyze_comment(request: CommentRequest):
         raise HTTPException(status_code=400, detail="Comment cannot be empty")
     try:
         response = client.models.generate_content(
-            model="gemini-2.0-flash",
+            model="gemini-2.5-flash",
             contents=(
                 f"Analyze the sentiment of this comment: \"{request.comment}\"\n\n"
                 "Return:\n"
